@@ -13,7 +13,7 @@ export const CartSlice = createSlice({
       );
 
       if (existingItem) {
-        // If the item exists, you can update its quantity or ignore it
+        // If the item exists, increment its quantity
         existingItem.quantity += 1;
       } else {
         // If the item doesn't exist, add it to the cart with a quantity of 1
@@ -38,6 +38,10 @@ export const CartSlice = createSlice({
     },
   },
 });
+
+// Selector to calculate the total number of items in the cart
+export const selectTotalItems = (state) =>
+  state.cart.items.reduce((total, item) => total + item.quantity, 0);
 
 export const { addItem, removeItem, updateQuantity } = CartSlice.actions;
 
